@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
+const bookRoutes = require('./routes/bookRoutes');
 
 const app = express();
 app.use(express.json());
-
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -18,9 +19,9 @@ mongoose.connect(process.env.MONGODB_URI, {
   process.exit(1);
 });
 
-
 app.use('/users', userRoutes);
-
+app.use('/products', productRoutes);
+app.use('/books', bookRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
